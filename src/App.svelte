@@ -8,7 +8,7 @@
   import Modal from './Modal.svelte'
   let expenses = []
   let setName = ''
-  let setamount = null
+  let setAmount = null
   let setId = null
   let isFormOpen = false
   function showForm() {
@@ -17,9 +17,9 @@
 
   function hideForm() {
     isFormOpen = false
-    let setName = ''
-    let setamount = null
-    let setId = null
+    setName = ''
+    setAmount = null
+    setId = null
   }
   function removeExpense(id) {
     expenses = expenses.filter((item) => item.id !== id)
@@ -44,11 +44,12 @@
     let expense = expenses.find((item) => item.id === id)
     setId = expense.id
     setName = expense.name
-    setamount = expense.amount
+    setAmount = expense.amount
     showForm()
   }
 
   function editExpense({ name, amount }) {
+    console.log('inside edit expense')
     expenses = expenses.map((item) => {
       return item.id === setId ? { ...item, name, amount } : { ...item }
     })
@@ -79,7 +80,7 @@
       <ExpenseForm
         {addExpense}
         name={setName}
-        amount={setamount}
+        amount={setAmount}
         {isEditing}
         {editExpense}
         {hideForm} />
